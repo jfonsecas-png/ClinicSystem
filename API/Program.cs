@@ -1,3 +1,5 @@
+using AppLogic;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSwaggerGen();
@@ -8,6 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSingleton<IPatientManager, PatientManager>();
+
 
 var app = builder.Build();
 

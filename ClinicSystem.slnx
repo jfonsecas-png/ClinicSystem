@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="API/API.csproj" />
+  <Project Path="AppLogic/AppLogic.csproj" Id="997c1c67-957d-4245-ad9b-226d91012303" />
+</Solution>

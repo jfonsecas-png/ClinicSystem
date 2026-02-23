@@ -12,6 +12,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSingleton<IPatientManager, PatientManager>();
 builder.Services.AddSingleton<IRHConnector, RHConnector>();
+builder.Services.AddSingleton<IEmployeeManager, EmployeeManager>();
 
 
 var app = builder.Build();

@@ -30,5 +30,16 @@ namespace API.Controllers
         {
             return await _employeeManager.GetEmployeeManager(employeeId);
         }
+        [HttpGet("GetOldest")]
+        public async Task<List<Employee>> GetOldest()
+        {
+            return await _employeeManager.GetOldestEmployees();
+        }
+
+        [HttpGet("GetNewest")]
+        public async Task<List<Employee>> GetNewest()
+        {
+            return await _employeeManager.GetNewestEmployees();
+        }
     }
 }

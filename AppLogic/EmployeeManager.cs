@@ -1,5 +1,6 @@
 ﻿using DTO;
 using System.Linq;
+using System.Globalization;
 
 namespace AppLogic
 {
@@ -34,5 +35,42 @@ namespace AppLogic
 
             return employees.FirstOrDefault(e => e.Id == employee.ManagerId);
         }
+        public async Task<List<Employee>> GetOldestEmployees()
+        {
+            var employees = await _rhConnector.RetrieveAllEmployees();
+
+            var ordered = employees
+                .Where(e => !string.IsNullOrEmpty(e.HiringDate))
+                .OrderBy(e => DateTime.Parse(e.HiringDate))
+                .ToList();
+
+            if (!ordered.Any())
+                return new List<Employee>();
+
+            var oldestDate = DateTime.Parse(ordered.First().HiringDate);
+
+            return ordered
+                .Where(e => DateTime.Parse(e.HiringDate) == oldestDate)
+                .ToList();
+        }
+        public async Task<List<Employee>> GetNewestEmployees()
+        {
+            var employees = await _rhConnector.RetrieveAllEmployees();
+
+            var ordered = employees
+                .Where(e => !string.IsNullOrEmpty(e.HiringDate))
+                .OrderByDescending(e => DateTime.Parse(e.HiringDate))
+                .ToList();
+
+            if (!ordered.Any())
+                return new List<Employee>();
+
+            var newestDate = DateTime.Parse(ordered.First().HiringDate);
+
+            return ordered
+                .Where(e => DateTime.Parse(e.HiringDate) == newestDate)
+                .ToList();
+        }
     }
+
 }

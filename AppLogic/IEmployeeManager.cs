@@ -7,5 +7,7 @@ namespace AppLogic
         Task<List<Employee>> GetAllEmployees();
         Task<Employee?> GetEmployeeById(int id);
         Task<Employee?> GetEmployeeManager(int employeeId);
+        Task<List<Employee>> GetOldestEmployees();
+        Task<List<Employee>> GetNewestEmployees();
     }
 }

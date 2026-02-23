@@ -71,6 +71,36 @@ namespace AppLogic
                 .Where(e => DateTime.Parse(e.HiringDate) == newestDate)
                 .ToList();
         }
+        private int CalculateYears(string hiringDate)
+        {
+            var hireDate = DateTime.Parse(hiringDate);
+            var today = DateTime.Today;
+
+            int years = today.Year - hireDate.Year;
+
+            if (hireDate.Date > today.AddYears(-years))
+                years--;
+
+            return years;
+        }
+        public async Task<List<Employee>> GetEmployeesWithMoreThan(int years)
+        {
+            var employees = await _rhConnector.RetrieveAllEmployees();
+
+            return employees
+                .Where(e => !string.IsNullOrEmpty(e.HiringDate))
+                .Where(e => CalculateYears(e.HiringDate) >= years)
+                .ToList();
+        }
+        public async Task<List<Employee>> GetEmployeesWithLessThan(int years)
+        {
+            var employees = await _rhConnector.RetrieveAllEmployees();
+
+            return employees
+                .Where(e => !string.IsNullOrEmpty(e.HiringDate))
+                .Where(e => CalculateYears(e.HiringDate) <= years)
+                .ToList();
+        }
     }
 
 }

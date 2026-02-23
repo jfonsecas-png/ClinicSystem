@@ -41,5 +41,16 @@ namespace API.Controllers
         {
             return await _employeeManager.GetNewestEmployees();
         }
+        [HttpGet("GetWithMoreThan")]
+        public async Task<List<Employee>> GetWithMoreThan(int years)
+        {
+            return await _employeeManager.GetEmployeesWithMoreThan(years);
+        }
+
+        [HttpGet("GetWithLessThan")]
+        public async Task<List<Employee>> GetWithLessThan(int years)
+        {
+            return await _employeeManager.GetEmployeesWithLessThan(years);
+        }
     }
 }

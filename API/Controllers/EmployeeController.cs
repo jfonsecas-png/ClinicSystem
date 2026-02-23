@@ -25,5 +25,10 @@ namespace API.Controllers
         {
             return await _employeeManager.GetEmployeeById(id);
         }
+        [HttpGet("GetManager")]
+        public async Task<Employee?> GetManager(int employeeId)
+        {
+            return await _employeeManager.GetEmployeeManager(employeeId);
+        }
     }
 }

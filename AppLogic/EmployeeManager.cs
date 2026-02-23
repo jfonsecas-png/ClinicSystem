@@ -23,5 +23,16 @@ namespace AppLogic
 
             return employees.FirstOrDefault(e => e.Id == id);
         }
+        public async Task<Employee?> GetEmployeeManager(int employeeId)
+        {
+            var employees = await _rhConnector.RetrieveAllEmployees();
+
+            var employee = employees.FirstOrDefault(e => e.Id == employeeId);
+
+            if (employee == null || employee.ManagerId == null)
+                return null;
+
+            return employees.FirstOrDefault(e => e.Id == employee.ManagerId);
+        }
     }
 }

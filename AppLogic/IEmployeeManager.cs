@@ -6,5 +6,6 @@ namespace AppLogic
     {
         Task<List<Employee>> GetAllEmployees();
         Task<Employee?> GetEmployeeById(int id);
+        Task<Employee?> GetEmployeeManager(int employeeId);
     }
 }

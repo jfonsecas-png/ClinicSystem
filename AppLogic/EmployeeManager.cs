@@ -1,4 +1,5 @@
 ﻿using DTO;
+using System.Linq;
 
 namespace AppLogic
 {
@@ -14,6 +15,13 @@ namespace AppLogic
         public async Task<List<Employee>> GetAllEmployees()
         {
             return await _rhConnector.RetrieveAllEmployees();
+        }
+
+        public async Task<Employee?> GetEmployeeById(int id)
+        {
+            var employees = await _rhConnector.RetrieveAllEmployees();
+
+            return employees.FirstOrDefault(e => e.Id == id);
         }
     }
 }

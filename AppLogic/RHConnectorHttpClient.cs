@@ -3,12 +3,12 @@ using Newtonsoft.Json;
 
 namespace AppLogic
 {
-    public class RHConnector : IRHConnector
+    public class RHConnectorHttpClient : IRHConnector
     {
         private static HttpClient _httpClient;
         private const string _baseUrl = "https://rh-central.azurewebsites.net/";
 
-        public RHConnector()
+        public RHConnectorHttpClient()
         {
             if (_httpClient == null)
             {

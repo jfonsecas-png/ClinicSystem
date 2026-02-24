@@ -7,6 +7,8 @@ namespace AppLogic
     public class EmployeeManager : IEmployeeManager
     {
         private readonly IRHConnector _rhConnector;
+        private readonly IRHConnector _rhConnectorRestSharp = new RHConnectorRestSharp();
+        private readonly IRHConnector _rhConnectorFlurl = new RHConnectorFlurl();
 
         public EmployeeManager(IRHConnector rhConnector)
         {
@@ -100,6 +102,14 @@ namespace AppLogic
                 .Where(e => !string.IsNullOrEmpty(e.HiringDate))
                 .Where(e => CalculateYears(e.HiringDate) <= years)
                 .ToList();
+        }
+        public async Task<List<Employee>> GetAllEmployeesRestSharp()
+        {
+            return await _rhConnectorRestSharp.RetrieveAllEmployees();
+        }
+        public async Task<List<Employee>> GetAllEmployeesFlurl()
+        {
+            return await _rhConnectorFlurl.RetrieveAllEmployees();
         }
     }
 

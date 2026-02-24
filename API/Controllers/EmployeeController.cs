@@ -52,5 +52,15 @@ namespace API.Controllers
         {
             return await _employeeManager.GetEmployeesWithLessThan(years);
         }
+        [HttpGet("GetAllRestSharp")]
+        public async Task<List<Employee>> GetAllRestSharp()
+        {
+            return await _employeeManager.GetAllEmployeesRestSharp();
+        }
+        [HttpGet("GetAllFlurl")]
+        public async Task<List<Employee>> GetAllFlurl()
+        {
+            return await _employeeManager.GetAllEmployeesFlurl();
+        }
     }
 }

@@ -11,5 +11,8 @@ namespace AppLogic
         Task<List<Employee>> GetNewestEmployees();
         Task<List<Employee>> GetEmployeesWithMoreThan(int years);
         Task<List<Employee>> GetEmployeesWithLessThan(int years);
+        Task<List<Employee>> GetAllEmployeesRestSharp();
+        Task<List<Employee>> GetAllEmployeesFlurl();
+
     }
-}
+    }

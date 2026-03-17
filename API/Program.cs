@@ -13,6 +13,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSingleton<IPatientManager, PatientManager>();
 builder.Services.AddSingleton<IRHConnector, RHConnectorHttpClient>();
 builder.Services.AddSingleton<IEmployeeManager, EmployeeManager>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowUI",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7255")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 
 var app = builder.Build();
@@ -34,6 +44,8 @@ else
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowUI");
 
 app.UseAuthorization();
 

@@ -35,6 +35,16 @@ builder.Services.AddSingleton<IAppointmentManager, AppointmentManager>();
 builder.Services.AddSingleton<IUserManager, UserManager>();
 builder.Services.AddSingleton<IRHConnector, RHConnectorHttpClient>();
 builder.Services.AddSingleton<IEmployeeManager, EmployeeManager>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowUI",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7255")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 
 //explicacion 1 Estas tres líneas leen los valores del appsettings

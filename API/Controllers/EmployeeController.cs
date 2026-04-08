@@ -1,9 +1,11 @@
 ﻿using AppLogic;
 using DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize(Roles = "ADMIN,SUPER")]//restringe el controller a roles ADMIN y SUPER
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase

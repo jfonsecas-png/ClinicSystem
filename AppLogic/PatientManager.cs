@@ -1,22 +1,27 @@
-﻿using DTO;
+﻿using DataAccess.Crud;
+using DTO;
 
 namespace AppLogic
 {
+    public interface IPatientManager
+    {
+        List<Patient> GetAllPatients();
+        Patient? GetPatientById(int id);
+    }
+
     public class PatientManager : IPatientManager
     {
         public List<Patient> GetAllPatients()
         {
-            return new List<Patient>
-            {
-                new Patient { Id = 1, Name = "Daniel" },
-                new Patient { Id = 2, Name = "Maria" },
-                new Patient { Id = 3, Name = "Carlos" }
-            };
+            var crud = new PatientCrud();
+            return crud.RetrieveAll<Patient>();
         }
 
-        public Patient GetPatientById(int id)
+        public Patient? GetPatientById(int id)
         {
-            return new Patient { Id = id, Name = "Paciente " + id };
+            var crud = new PatientCrud();
+            var patients = crud.RetrieveAll<Patient>();
+            return patients.FirstOrDefault(p => p.Id == id);
         }
     }
 }

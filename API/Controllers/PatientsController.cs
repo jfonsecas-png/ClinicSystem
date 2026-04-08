@@ -1,9 +1,11 @@
 ﻿using AppLogic;
 using DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PatientsController : ControllerBase
@@ -16,15 +18,37 @@ namespace API.Controllers
         }
 
         [HttpGet("GetAll")]
-        public List<Patient> GetAll()
+        public ApiResponse GetAll()
         {
-            return _patientManager.GetAllPatients();
+            var response = new ApiResponse();
+            try
+            {
+                response.Data = _patientManager.GetAllPatients();
+                response.Result = "ok";
+            }
+            catch (Exception ex)
+            {
+                response.Result = "error";
+                response.Message = ex.Message;
+            }
+            return response;
         }
 
         [HttpGet("GetById")]
-        public Patient GetById(int id)
+        public ApiResponse GetById(int id)
         {
-            return _patientManager.GetPatientById(id);
+            var response = new ApiResponse();
+            try
+            {
+                response.Data = _patientManager.GetPatientById(id);
+                response.Result = "ok";
+            }
+            catch (Exception ex)
+            {
+                response.Result = "error";
+                response.Message = ex.Message;
+            }
+            return response;
         }
     }
 }

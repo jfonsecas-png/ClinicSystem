@@ -5,7 +5,7 @@ namespace AppLogic
 {
     public class RHConnectorHttpClient : IRHConnector
     {
-        private static HttpClient _httpClient;
+        private static HttpClient? _httpClient;
         private const string _baseUrl = "https://rh-central.azurewebsites.net/";
 
         public RHConnectorHttpClient()
